@@ -1,5 +1,7 @@
-gdocs2md
+gdocs2md (FORKED)
 ========
+
+*This repo is forked from [mangine/gdocs2md](https://github.com/mangini/gdocs2md), you should probably go there instead.*
 
 A simple Google Apps script to convert a properly formatted Google Drive Document to the markdown (.md) format. 
 
