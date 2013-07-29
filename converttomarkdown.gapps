@@ -172,6 +172,13 @@ function findPrefix(inSrc, element, listCounters) {
       var gt = listItem.getGlyphType();
       if (gt === DocumentApp.GlyphType.BULLET || gt === DocumentApp.GlyphType.HOLLOW_BULLET || 
           gt === DocumentApp.GlyphType.SQUARE_BULLET) {
+        var key = listItem.getListId() + '.' + listItem.getNestingLevel();
+        var counter = listCounters[key] || 0;
+        counter++;
+        listCounters[key] = counter;
+        if( 1 === counter && '    ' !== prefix ) {
+            prefix += "\n";
+        }
         prefix += "* ";
       } else {
         var key = listItem.getListId() + '.' + listItem.getNestingLevel();
