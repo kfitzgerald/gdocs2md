@@ -178,6 +178,9 @@ function findPrefix(inSrc, element, listCounters) {
         var counter = listCounters[key] || 0;
         counter++;
         listCounters[key] = counter;
+        if( 1 === counter && '    ' !== prefix ) {
+            prefix += "\n";
+        }
         prefix += "1. ";
       }
     }
