@@ -143,6 +143,9 @@ function processParagraph(index, element, inSrc, imageCounter, listCounters) {
     // replace Unicode quotation marks
     pOut = pOut.replace('\u201d', '"').replace('\u201c', '"');
  
+    if ( '# ' === prefix || '## ' === prefix || '### ' === prefix || '#### ' === prefix || '##### ' === prefix || '###### ' === prefix ) {
+      prefix = "\n" + prefix;
+    }
     result.text = prefix+pOut;
   }
   
