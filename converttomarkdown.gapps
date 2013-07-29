@@ -145,6 +145,8 @@ function processParagraph(index, element, inSrc, imageCounter, listCounters) {
  
     if ( '# ' === prefix || '## ' === prefix || '### ' === prefix || '#### ' === prefix || '##### ' === prefix || '###### ' === prefix ) {
       prefix = "\n" + prefix;
+    } else if ( '' === prefix ) {
+      prefix = "\n";
     }
     result.text = prefix+pOut;
   }
