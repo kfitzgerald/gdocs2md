@@ -172,7 +172,7 @@ function findPrefix(inSrc, element, listCounters) {
       var listItem = element;
       var nesting = listItem.getNestingLevel()
       for (var i=0; i<nesting; i++) {
-        prefix += "    ";
+        prefix += "\t";
       }
       var gt = listItem.getGlyphType();
       if (gt === DocumentApp.GlyphType.BULLET || gt === DocumentApp.GlyphType.HOLLOW_BULLET || 
@@ -181,7 +181,7 @@ function findPrefix(inSrc, element, listCounters) {
         var counter = listCounters[key] || 0;
         counter++;
         listCounters[key] = counter;
-        if( 1 === counter && '    ' !== prefix ) {
+        if( 1 === counter && '\t' !== prefix ) {
             prefix += "\n";
         }
         prefix += "* ";
@@ -190,7 +190,7 @@ function findPrefix(inSrc, element, listCounters) {
         var counter = listCounters[key] || 0;
         counter++;
         listCounters[key] = counter;
-        if( 1 === counter && '    ' !== prefix ) {
+        if( 1 === counter && '\t' !== prefix ) {
             prefix += "\n";
         }
         prefix += "1. ";
