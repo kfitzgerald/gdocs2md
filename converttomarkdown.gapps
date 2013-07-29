@@ -26,11 +26,11 @@ function ConvertToMarkdown() {
         inClass=false;
         text+="</div>\n\n";
       } else if (inClass) {
-        text+=result.text+"\n\n";
+        text+=result.text+"\n";
       } else if (inSrc) {
         text+=("    "+escapeHTML(result.text)+"\n");
       } else if (result.text && result.text.length>0) {
-        text+=result.text+"\n\n";
+        text+=result.text+"\n";
       }
       
       if (result.images && result.images.length>0) {
