@@ -26,11 +26,11 @@ function ConvertToMarkdown() {
         inClass=false;
         text+="</div>\n\n";
       } else if (inClass) {
-        text+=result.text+"\n\n";
+        text+=result.text+"\n";
       } else if (inSrc) {
         text+=("    "+escapeHTML(result.text)+"\n");
       } else if (result.text && result.text.length>0) {
-        text+=result.text+"\n\n";
+        text+=result.text+"\n";
       }
       
       if (result.images && result.images.length>0) {
@@ -170,6 +170,11 @@ function processParagraph(index, element, inSrc, imageCounter, listCounters) {
     // replace Unicode quotation marks
     pOut = pOut.replace('\u201d', '"').replace('\u201c', '"');
  
+    if ( '# ' === prefix || '## ' === prefix || '### ' === prefix || '#### ' === prefix || '##### ' === prefix || '###### ' === prefix ) {
+      prefix = "\n" + prefix;
+    } else if ( '' === prefix ) {
+      prefix = "\n";
+    }
     result.text = prefix+pOut;
   }
   
@@ -194,18 +199,28 @@ function findPrefix(inSrc, element, listCounters) {
       var listItem = element;
       var nesting = listItem.getNestingLevel()
       for (var i=0; i<nesting; i++) {
-        prefix += "    ";
+        prefix += "\t";
       }
       var gt = listItem.getGlyphType();
       if (gt === DocumentApp.GlyphType.BULLET || gt === DocumentApp.GlyphType.HOLLOW_BULLET || 
           gt === DocumentApp.GlyphType.SQUARE_BULLET) {
+        var key = listItem.getListId() + '.' + listItem.getNestingLevel();
+        var counter = listCounters[key] || 0;
+        counter++;
+        listCounters[key] = counter;
+        if( 1 === counter && '\t' !== prefix ) {
+            prefix += "\n";
+        }
         prefix += "* ";
       } else {
         var key = listItem.getListId() + '.' + listItem.getNestingLevel();
         var counter = listCounters[key] || 0;
         counter++;
         listCounters[key] = counter;
-        prefix += counter+". ";
+        if( 1 === counter && '\t' !== prefix ) {
+            prefix += "\n";
+        }
+        prefix += "1. ";
       }
     }
   }

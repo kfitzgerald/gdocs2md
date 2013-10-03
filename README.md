@@ -1,5 +1,12 @@
-gdocs2md
+gdocs2md (FORKED)
 ========
+
+*This repo is forked from [mangine/gdocs2md](https://github.com/mangini/gdocs2md), you should probably go there instead.*
+
+My changes:
+* Avoid overuse of new lines by grouping list items together while inserting new lines before every other element
+* Use tabs instead of spaces for nested lists
+* Prefix all ordered lists with 1 rather than incrementing
 
 A simple Google Apps script to convert a properly formatted Google Drive Document to the markdown (.md) format. 
 
