@@ -1,18 +1,20 @@
 gdocs2md (FORKED)
 ========
 
-*This repo is forked from [mangine/gdocs2md](https://github.com/mangini/gdocs2md), you should probably go there instead.*
+*This repo is forked from [mangine/gdocs2md](https://github.com/mangini/gdocs2md)*
 
-My changes:
+
+[KFitzgerald's](https://github.com/kfitzgerald/gdocs2md) changes:
+  * Added basic support for [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#tables) tables (what the [plugin for IntelliJ](https://github.com/nicoulaj/idea-markdown) uses)
+
+
+[JeremyFelt's](https://github.com/jeremyfelt/gdocs2md) changes:
 * Avoid overuse of new lines by grouping list items together while inserting new lines before every other element
 * Use tabs instead of spaces for nested lists
 * Prefix all ordered lists with 1 rather than incrementing
 
 A simple Google Apps script to convert a properly formatted Google Drive Document to the markdown (.md) format. 
 
-## Fork Notes
-  * Added basic support for [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#tables) tables (what the [plugin for IntelliJ](https://github.com/nicoulaj/idea-markdown) uses)
-  * Since I use Ubuntu Mono so I used that font family instead
 
 ## Usage
   * Open your Google Drive document (http://drive.google.com)
