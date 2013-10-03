@@ -71,17 +71,44 @@ function processParagraph(index, element, inSrc, imageCounter, listCounters) {
   
   var result = {};
 
-  var pOut = "";
-  var textElements = [];
-  var imagePrefix = "image_";
+  var pOut = "",
+      textElements = [],
+      imagePrefix = "image_",
+      lastRowNumber = null;
   
   for (var i=0; i<element.getNumChildren(); i++) {
     var t=element.getChild(i).getType();
-    if (t === DocumentApp.ElementType.TEXT || t === DocumentApp.ElementType.TABLE_ROW) {
-      // TODO: proper handling of table_row
+    
+    // clear the row counter once we're done with the table
+    if (t !== DocumentApp.ElementType.TABLE_ROW) {
+      lastRowNumber = null;
+    }
+    
+    if (t === DocumentApp.ElementType.TEXT) {
       var txt=element.getChild(i);
       pOut += txt.getText();
       textElements.push(txt);
+    } else if (t === DocumentApp.ElementType.TABLE_ROW) { 
+      
+      var row = element.getChild(i),
+          cellCount = row.getNumCells();
+      
+      if (lastRowNumber != null && lastRowNumber == 0) {
+        // header markdown
+        for (var c=0; c < cellCount; c++) {
+          textElements.push((c == 0 ? '| ' : ' ') + '---' + ' |');
+        }
+        textElements.push('\n');
+      }
+      
+      for (var c=0; c < cellCount; c++) {
+        textElements.push((c == 0 ? '| ' : ' ') + row.getCell(c).getText().replace('-', '\\-').replace('|', '/').replace(/(\r\n|\n|\r)/gm, ' ') + ' |');
+      }
+      
+      lastRowNumber = lastRowNumber == null ? 0 : lastRowNumber+1;
+      
+      textElements.push('\n');
+      
     } else if (t === DocumentApp.ElementType.INLINE_IMAGE) {
       result.images = result.images || [];
       var contentType = element.getChild(i).getBlob().getContentType();
